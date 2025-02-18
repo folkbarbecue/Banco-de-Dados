@@ -1,0 +1,104 @@
+create database EmpresaTech; 
+drop table Funcionario_Projeto;
+drop table funcionario;
+drop database empresatech;
+use EmpresaTech;
+
+create table funcionario(
+id_funcionario int primary key auto_increment,
+nome_func varchar(50),
+telefone_func char(15) unique not null,
+salario_func varchar(10) not null
+);
+create table Departamento(
+id_departamento int primary key auto_increment,
+nome_derp varchar(50) unique,
+local_derp char(255)
+);
+create table projeto(
+id_projeto int primary key auto_increment,
+nome_proj varchar(50) not null,
+descri_proj char(255)
+);
+create table cliente(
+id_cliente int primary key auto_increment,
+tel_client varchar(50) unique not null,
+nome_client char(255)
+);
+create table Funcionario_Projeto(
+id_fun_pro int primary key auto_increment,
+id_funcionario int,
+SADATA varchar(50),
+Lembra varchar(50)
+);
+
+
+alter table Funcionario_Projeto add constraint id_funcionario foreign key(id_funcionario) 
+references funcionario(id_funcionario);
+
+
+
+create table supervisor(
+id_supervisor int primary key auto_increment,
+cargo_super varchar(50),
+nome_super char(255)
+);
+insert into funcionario( nome_func, telefone_func, salario_func)
+values('Arthur', '0000-0001', '1380'),
+('Thais', '0000-0002', '1380'),
+('Heitor', '0000-0003', '1380'),
+('Davi', '0000-0004', '1380'),
+('Clara', '0000-0005', '1380'),
+('Matheus', '0000-0006', '1380'),
+('Malu', '0000-0007', '1380'),
+('Luiza', '0000-0008', '1380'),
+('Romero', '0000-0009', '1380'),
+('Diogo', '0000-0010', '1380');
+
+
+insert into Departamento(nome_derp, local_derp)
+values('Polo 1', 'Porto Digital'),
+('Polo 2', 'Senac'),
+('Polo 3', 'Laboratorio');
+
+insert into projeto(nome_proj,descri_proj)
+values('SADTA', 'Projeto deslizamento'),
+('Lembra+', 'Projeto para alzheimer'),
+('Logistica', 'Um projeto para melhorar...'),
+('semidea', 'bla bla bla bla...');
+
+insert into cliente(nome_client, tel_client)
+values('Arthur', '0000-0001'),
+('Thais', '0000-0002'),
+('Heitor', '0000-0003'),
+('Davi', '0000-0004'),
+('Clara', '0000-0005'),
+('Matheus', '0000-0006'),
+('Malu', '0000-0007'),
+('Luiza', '0000-0008'),
+('Romero', '0000-0009'),
+('Diogo', '0000-0010');
+
+
+
+-- show tables
+
+
+INSERT INTO Funcionario_Projeto (id_funcionario, SADATA, Lembra)
+VALUES
+(1, 'Arthur', 'Eduardo'),
+(2, 'Thais', 'Davi'),
+(3, 'Heitor', 'Guilherme'),
+(4, 'Davi', 'Geovana'),
+(5, 'Clara', 'Carol'),
+(6, 'Matheus', 'Gabi'),
+(7, 'Malu', 'Bruno'),
+(8, 'Luiza', 'Diogenes'),
+(9, 'Romero', 'Ligia'),
+(10, 'Diogo', 'Matheus');
+
+
+
+
+
+select * from Funcionario_Projeto;
