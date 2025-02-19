@@ -1,0 +1,65 @@
+create database rh;
+use rh;
+drop database rh;
+
+
+create table empresa(
+id_empresa int primary key,
+nome_emp varchar (234) not null,
+cnpj varchar (255) not null unique,
+endececo_emp char (2) not null
+);
+
+create table cand(
+id_cand int primary key auto_increment,
+tele_cand char(10) not null unique,
+nome_cand char (24) not null,
+email_cand char (30) not null unique
+);
+
+create table vaga(
+id_vaga int primary key auto_increment,
+requisitos varchar(700),
+titulo varchar(700) not null,
+descricao varchar(700),
+data_a char (50) not null,
+data_f char(50),
+id_empresa int
+);
+
+create table candidatura(
+id_candidatura int primary key auto_increment,
+id_vaga int,
+id_cand int,
+data_cand char(50) not null,
+stats char(4) not null
+);
+
+
+insert into cand(id_cand, tele_cand, nome_cand, email_cand)
+values(id_cand,'3842-4892','robson', 'roson@gmail.com' );
+
+
+insert into empresa(id_empresa, nome_emp, cnpj, endececo_emp)
+values(1,'romeros', '2313', 'PE');
+
+
+insert into vaga(requisitos, titulo, descricao, data_a, data_f, id_empresa)
+values('ser profissional em ti com doutorado', 'desenvolvedor de apis', 'ultilizar programação para desenvolver aplicações e apis', '14/02/2017', 'inderterminado', 1);
+
+insert into candidatura(id_candidatura, id_vaga, id_cand, data_cand, stats)
+values(id_candidatura, 1, 4, '02/02/2025', 'ok');
+
+
+
+alter table vaga add constraint id_empresa foreign key(id_empresa) references empresa(id_empresa);
+alter table candidatura add constraint id_vaga foreign key(id_vaga) references vaga(id_vaga);
+alter table candidatura add constraint id_cand foreign key(id_cand) references cand(id_cand);
+
+
+select * from vaga;
+select * from empresa;
+select * from candidatura;
+select * from cand;
+
+
