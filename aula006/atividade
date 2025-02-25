@@ -1,0 +1,58 @@
+create database BancoMercado;
+use BancoMercado;
+drop database bancomercado;
+
+create table Produto(
+id_produto int primary key auto_increment,
+nm_produto varchar(100) not null,
+uf_produto char(255) not null,
+vl_produto char(255) not null
+);
+
+create table encomenda(
+id_encomenda int primary key auto_increment,
+id_produto int,
+nm_produto varchar(100) not null,
+uf_produto char(255) not null,
+vl_produto char(255) not null
+);
+
+create table Cliente(
+id_cliente int primary key auto_increment,
+nome_cliente varchar(50) not null
+);
+
+alter table encomenda add constraint id_produto foreign key(id_produto)
+references Produto(id_produto);
+
+
+
+insert into Produto(id_produto, nm_produto, uf_produto, vl_produto)
+values(1, 'Item1', 2, 234),
+(2, 'Item2', 2, 234),
+(3, 'Item3', 2, 234),
+(4, 'Item4', 2, 234),
+(5, 'Item5', 2, 234),
+(6, 'Item6', 2, 234),
+(7, 'Item7', 2, 234),
+(8, 'Item8', 2, 234),
+(9, 'Item9', 2, 234),
+(10, 'Item10', 2, 234);
+     
+insert into encomenda(id_encomenda,id_produto, nm_produto, uf_produto, vl_produto)
+values(1, '1','Item1', 2, 234),
+(2, '1','Item2', 2, 234),
+(3, '1','Item3', 2, 234),
+(4, '1','Item4', 2, 234),
+(5, '1','Item5', 2, 234),
+(6, '1','Item6', 2, 234),
+(7, '1','Item7', 2, 234),
+(8, '1','Item8', 2, 234),
+(9,'1', 'Item9', 2, 234),
+(10, '1','Item10', 2, 234);
+
+     
+
+select * From encomenda;
+select * From Produto;
+select * From Cliente;
