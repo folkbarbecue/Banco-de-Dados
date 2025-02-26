@@ -1,0 +1,142 @@
+create database EmpresaTech; 
+drop table Funcionario_Projeto;
+use EmpresaTech;
+
+create table funcionario(
+id_funcionario int primary key auto_increment,
+nome_func varchar(50),
+telefone_func char(15),
+salario_func varchar(10)
+);
+create table Departamento(
+id_departamento int primary key auto_increment,
+nome_derp varchar(50),
+local_derp char(255)
+);
+create table projeto(
+id_projeto int primary key auto_increment,
+nome_proj varchar(50),
+descri_proj char(255)
+);
+create table cliente(
+id_cliente int primary key auto_increment,
+tel_client varchar(50),
+nome_client char(255)
+);
+create table Funcionario_Projeto(
+id_Funcionario_Projeto int primary key auto_increment,
+SADATA varchar(50),
+Lembra varchar(50)
+);
+create table supervisor(
+id_supervisor int primary key auto_increment,
+cargo_super varchar(50),
+nome_super char(255)
+);
+insert into funcionario(nome_func, telefone_func, salario_func)
+values('Arthur', '0000-0001', '1380'),
+('Thais', '0000-0002', '1380'),
+('Heitor', '0000-0003', '1380'),
+('Davi', '0000-0004', '1380'),
+('Clara', '0000-0005', '1380'),
+('Matheus', '0000-0006', '1380'),
+('Malu', '0000-0007', '1380'),
+('Luiza', '0000-0008', '1380'),
+('Romero', '0000-0009', '1380'),
+('Diogo', '0000-0010', '1380');
+
+UPDATE funcionario
+SET nome_func = 'BOB' Where id_funcionario = 1;
+UPDATE funcionario
+SET nome_func = 'DOD' Where id_funcionario = 2;
+UPDATE funcionario
+SET nome_func = 'LINK' Where id_funcionario = 3;
+UPDATE funcionario
+SET nome_func = 'Msrio' Where id_funcionario = 4;
+UPDATE funcionario
+SET nome_func = 'Luigi' Where id_funcionario = 5;
+UPDATE funcionario
+SET nome_func = 'ASH' Where id_funcionario = 6;
+UPDATE funcionario
+SET nome_func = 'DAVID' Where id_funcionario = 7;
+UPDATE funcionario
+SET nome_func = 'GUIU' Where id_funcionario = 8;
+UPDATE funcionario
+SET nome_func = 'YGTIKV' Where id_funcionario = 9;
+UPDATE funcionario
+SET nome_func = 'UYITG' Where id_funcionario = 10;
+
+
+SELECT MAX(id_funcionario) from funcionario;
+SELECT MIN(id_funcionario) from funcionario;
+SELECT AVG(id_funcionario) from funcionario;
+SELECT SUM(id_pessoal) from funcionario;
+
+insert into Departamento(nome_derp, local_derp)
+values('Polo 1', 'Porto Digital'),
+('Polo 2', 'Senac'),
+('Polo 3', 'Laboratorio');
+
+insert into projeto(nome_proj,descri_proj)
+values('SADTA', 'Projeto deslizamento'),
+('Lembra+', 'Projeto para alzheimer'),
+('Logistica', 'Um projeto para melhorar...'),
+('semidea', 'bla bla bla bla...');
+
+UPDATE projeto
+set nome_proj = 'SIS' Where id_projeto = 1;
+UPDATE projeto
+set nome_proj = 'PROJ' Where id_projeto = 2;
+UPDATE projeto
+set nome_proj = 'RID' Where id_projeto = 3;
+UPDATE projeto
+set nome_proj = 'Bla' Where id_projeto = 4;
+
+SELECT MAX(id_projeto) from projeto;
+SELECT MIN(id_projeto) from projeto;
+SELECT AVG(id_projeto) from projeto;
+SELECT SUM(id_projeto) from projeto;
+
+
+SELECT COUNT(id_projeto)
+FROM projeto
+WHERE id_projeto=4;
+
+select nome_proj
+AS nome
+from projeto;
+select descri_proj
+AS descrição
+from projeto;
+
+insert into cliente(nome_client, tel_client)
+values('Arthur', '0000-0001'),
+('Thais', '0000-0002'),
+('Heitor', '0000-0003'),
+('Davi', '0000-0004'),
+('Clara', '0000-0005'),
+('Matheus', '0000-0006'),
+('Malu', '0000-0007'),
+('Luiza', '0000-0008'),
+('Romero', '0000-0009'),
+('Diogo', '0000-0010');
+
+SELECT MAX(id_cliente) from cliente;
+SELECT MIN(id_cliente) from cliente;
+SELECT AVG(id_cliente) from cliente;
+SELECT SUM(id_cliente) from cliente;
+
+
+insert into Funcionario_Projeto(SADATA, Lembra)
+values('Arthur', 'Eduardo'),
+('Thais', 'Davi'),
+('Heitor', 'Guilherme'),
+('Davi', 'Geovana'),
+('Clara', 'Carol'),
+('Matheus', 'Gabi'),
+('Malu', 'Bruno'),
+('Luiza', 'Diogenes'),
+('Romero', 'Ligia'),
+('Diogo', 'Matheus');
+
+select * from projeto;
