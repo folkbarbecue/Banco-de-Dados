@@ -1,0 +1,181 @@
+create database atv;
+use atv;
+drop database atv;
+
+create table usuarios(
+id_usu int primary key auto_increment unique,
+email_usu varchar(255),
+senha_usu varchar(30),
+nome_usu varchar(255),
+cpf char(14),
+ende varchar(255)
+);
+
+create table pedidos(
+id_ped int primary key auto_increment unique,
+id_usu int,
+status_ped varchar(255)
+);
+
+create table produtos(
+id_prod int primary key auto_increment unique,
+preco varchar(30),
+prod varchar(255)
+);
+
+create table avaliacao(
+id_av int primary key auto_increment unique,
+status_av varchar(255),
+id_prod int
+);
+
+insert into usuarios(id_usu, email_usu, senha_usu, nome_usu, cpf, ende)
+values (1, 'osvaldobem10@gmail.com', '1231234545', 'Osvaldo Silva', '123.123.123-58', 'Igarassu tal tal tal'),
+(2, 'mariajose88@gmail.com', 'senha123', 'Maria Jose', '234.234.234-67', 'Paulista outro tal tal tal'),
+(3, 'joaopedro99@gmail.com', 'senha456', 'João Pedro', '345.345.345-76', 'Recife centro tal tal tal'),
+(4, 'anacarolina77@gmail.com', 'senha789', 'Ana Carolina', '456.456.456-85', 'Olinda bairro tal tal tal'),
+(5, 'carloshenrique22@gmail.com', 'senha012', 'Carlos Henrique', '567.567.567-94', 'Jaboatão novo tal tal tal'),
+(6, 'lucianaferreira33@gmail.com', 'senha345', 'Luciana Ferreira', '678.678.678-03', 'Camaragibe área tal tal tal'),
+(7, 'marcelosantos55@gmail.com', 'senha678', 'Marcelo Santos', '789.789.789-12', 'Caruaru norte tal tal tal'),
+(8, 'fernandasilva66@gmail.com', 'senha901', 'Fernanda Silva', '890.890.890-21', 'Garanhuns sul tal tal tal'),
+(9, 'rodrigomoreira44@gmail.com', 'senha234', 'Rodrigo Moreira', '901.901.901-30', 'Petrolina oeste tal tal tal'),
+(10, 'patriciabeatriz77@gmail.com', 'senha567', 'Patricia Beatriz', '012.012.012-49', 'Arcoverde leste tal tal tal'),
+(11, 'brunovinicius88@gmail.com', 'senha890', 'Bruno Vinícius', '123.987.654-32', 'Serra Talhada central tal tal tal'),
+(12, 'jessicasouza99@gmail.com', 'senha1234', 'Jéssica Souza', '234.876.543-21', 'Gravatá cidade tal tal tal'),
+(13, 'andersonpereira66@gmail.com','senha293', 'Anderson Pereira', '343.234.234-23', 'Recife tal bla'),
+(14, 'davifelix22', 'senha213', 'Davi Felix', '123.123.123-23', 'Maranguape tals bla sei la'),
+(15, 'Heitor Marinho', 'senha832', 'Heitor Marinho', '241.123.574-74', 'Garanhuns Alguma coisa');
+
+
+insert into pedidos(id_ped, id_usu, status_ped)
+values (1, 1, 'enviado'),
+(2, 1, 'entregue'),
+(3, 1, 'enviado'),
+(4, 2, 'entregue'),
+(5, 2, 'enviado'),
+(6, 2, 'processamento'),
+(7, 3, 'enviado'),
+(8, 3, 'entregue'),
+(9, 3, 'enviado'),
+(10, 4, 'entregue'),
+(11, 4, 'enviado'),
+(12, 4, 'processamento'),
+(13, 5, 'enviado'),
+(14, 5, 'entregue'),
+(15, 5, 'enviado'),
+(16, 6, 'entregue'),
+(17, 6, 'enviado'),
+(18, 6, 'processamento'),
+(19, 7, 'enviado'),
+(20, 7, 'entregue'),
+(21, 7, 'enviado'),
+(22, 8, 'entregue'),
+(23, 8, 'enviado'),
+(24, 8, 'processamento'),
+(25, 9, 'enviado'),
+(26, 9, 'entregue'),
+(27, 9, 'enviado'),
+(28, 10, 'entregue'),
+(29, 10, 'enviado'),
+(30, 10, 'processamento'),
+(31, 11, 'enviado'),
+(32, 11, 'entregue'),
+(33, 11, 'enviado'),
+(34, 12, 'entregue'),
+(35, 12, 'enviado'),
+(36, 12, 'processamento'),
+(37, 13, 'enviado'),
+(38, 13, 'entregue'),
+(39, 13, 'enviado'),
+(40, 14, 'entregue'),
+(41, 14, 'enviado'),
+(42, 14, 'processamento'),
+(43, 15, 'enviado'),
+(44, 15, 'entregue'),
+(45, 15, 'enviado');
+
+alter table pedidos add constraint id_usu foreign key(id_usu)
+references usuarios(id_usu);
+
+insert into produtos (id_prod, preco, prod)
+values (1, '424', 'aspirador de pó'),
+(2, '500', 'liquidificador'),
+(3, '150', 'ventilador'),
+(4, '300', 'micro-ondas'),
+(5, '250', 'cafeteira'),
+(6, '800', 'geladeira'),
+(7, '1000', 'máquina de lavar'),
+(8, '600', 'forno elétrico'),
+(9, '200', 'ferro de passar'),
+(10, '700', 'fogão'),
+(11, '400', 'secador de cabelo'),
+(12, '350', 'chaleira elétrica'),
+(13, '450', 'torradeira'),
+(14, '550', 'aspirador robô'),
+(15, '650', 'ar-condicionado');
+
+update usuarios
+set ende = 'Paulista sei lá das quantas' where id_usu = 1;
+update usuarios
+set ende = 'Igarassu lá das quantas' where id_usu = 2;
+update usuarios
+set ende = 'Olinda sei lá das quantas' where id_usu = 3;
+update usuarios
+set ende = 'Recife sei lá das quantas' where id_usu = 4;
+update usuarios
+set ende = 'Camaragibe sei lá das quantas' where id_usu = 5;
+update usuarios
+set ende = 'Jaboatão sei lá das quantas' where id_usu = 6;
+update usuarios
+set ende = 'Caruaru sei lá das quantas' where id_usu = 7;
+update usuarios
+set ende = 'Petrolina sei lá das quantas' where id_usu = 8;
+update usuarios
+set ende = 'Garanhuns sei lá das quantas' where id_usu = 9;
+update usuarios
+set ende = 'Arcoverde sei lá das quantas' where id_usu = 10;
+update usuarios
+set ende = 'Serra Talhada sei lá das quantas' where id_usu = 11;
+update usuarios
+set ende = 'Palmares sei lá das quantas' where id_usu = 12;
+update usuarios
+set ende = 'Afogados sei lá das quantas' where id_usu = 13;
+update usuarios
+set ende = 'Salgueiro sei lá das quantas' where id_usu = 14;
+update usuarios
+set ende = 'Vitória sei lá das quantas' where id_usu = 15;
+
+update produtos
+set preco = '320' where id_prod = 1;
+update produtos
+set preco = '320' where id_prod = 2;
+update produtos
+set preco = '320' where id_prod = 3;
+update produtos
+set preco = '320' where id_prod = 4;
+update produtos
+set preco = '320' where id_prod= 5;
+update produtos
+set preco = '320' where id_prod = 6;
+update produtos
+set preco = '320' where id_prod = 7;
+update produtos
+set preco = '320' where id_prod = 8;
+update produtos
+set preco = '320' where id_prod = 9;
+update produtos
+set preco = '320' where id_prod = 10;
+update produtos
+set preco = '320' where id_prod = 11;
+update produtos
+set preco = '320' where id_prod = 12;
+update produtos
+set preco = '320' where id_prod = 13;
+update produtos
+set preco = '320' where id_prod = 14;
+update produtos
+set preco = '320' where id_prod = 15;
+
+select * from usuarios;
+select * from pedidos;
+select * from produtos;
