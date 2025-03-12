@@ -1,0 +1,136 @@
+create database atv;
+use atv;
+drop database atv;
+
+create table clientes(
+    id_cliente int primary key auto_increment,
+    nome varchar(255) not null,
+    email varchar(255) not null,
+    telefone varchar(20)
+);
+
+create table evento(
+    id_evento int primary key auto_increment,
+    nome_evento varchar(255) not null,
+    data_evento date,
+    local_evento varchar(255) not null
+);
+
+create table inscricao(
+    id_inscricao int primary key auto_increment,
+    id_cliente int,
+    id_evento int,
+    data_inscricao date
+);
+
+create table pagamento(
+    id_pagamento int primary key auto_increment,
+    id_cliente int,
+    valor_pagamento varchar(255),
+    status_pagamento varchar(255)
+);
+
+alter table inscricao add constraint id_cliente foreign key(id_cliente)
+references clientes(id_cliente);
+alter table pagamento add constraint id_cliente foreign key(id_cliente)
+references clientes(id_cliente);
+alter table inscricao add constraint id_evento foreign key(id_evento)
+references evento(id_evento);
+
+insert into clientes(nome, email, telefone)
+values('Roberto', 'roberto@gmail', '123456789'),
+    ('Valdez', 'valdez@gmail', '123456789'),
+    ('Thais', 'thais@gmail', '123456789'),
+    ('Clara', 'clara@gmail', '123456789'),
+    ('Galego', 'galego@gmail', '123456789'),
+    ('Heitor', 'heitor@gmail', '123456789'),
+    ('Davi', 'davi@gmail', '123456789'),
+    ('Gabi', 'gabi@gmail', '123456789'),
+    ('Luiza', 'luiza@gmail', '123456789'),
+    ('Diogo', 'diogo@gmail', '123456789'),
+    ('Antonio', 'antonio@gmail', '123456789'),
+    ('Julio', 'julio@gmail', '123456789'),
+    ('Ana', 'ana@gmail', '123456789'),
+    ('Romero', 'romero@gmail', '123456789'),
+    ('Lucas', 'lucas@gmail', '123456789');
+
+insert into evento(nome_evento, data_evento, local_evento)
+values
+    ('ClubeM', '2025-04-12', 'Local A'),
+    ('Nasa', '2025-04-02', 'Local B'),
+    ('Memaker', '2025-04-03', 'Local C'),
+    ('Show', '2025-04-04', 'Local D'),
+    ('Palestra', '2025-04-08', 'Local E');
+
+insert into inscricao(id_cliente, id_evento, data_inscricao)
+values
+    (1, 1, '2025-03-01'),
+    (2, 2, '2025-03-02'),
+    (3, 3, '2025-03-03'),
+    (4, 4, '2025-03-04'),
+    (5, 5, '2025-03-05'),
+    (7, 1, '2025-03-01'),
+    (8, 2, '2025-03-02'),
+    (9, 3, '2025-03-03'),
+    (10, 4, '2025-03-04'),
+    (11, 1, '2025-03-01'),
+    (12, 2, '2025-03-02'),
+    (13, 3, '2025-03-03'),
+    (14, 4, '2025-03-04'),
+    (15, 1, '2025-03-01'),
+    (15, 2, '2025-03-02'),
+    (13, 3, '2025-03-03'),
+    (14, 4, '2025-03-04');
+
+insert into pagamento(id_cliente, valor_pagamento, status_pagamento)
+values
+    (1, '100.00', 'Valor pago'),
+    (2, '150.00', 'Valor não pago'),
+    (3, '200.00', 'Valor pago'),
+    (4, '250.00', 'Valor não pago'),
+    (5, '300.00', 'Valor pago'),
+        (6, '100.00', 'Valor pago'),
+    (7, '150.00', 'Valor não pago'),
+    (8, '200.00', 'Valor pago'),
+    (9, '250.00', 'Valor não pago'),
+    (10, '300.00', 'Valor pago'),
+        (11, '100.00', 'Valor pago'),
+    (12, '150.00', 'Valor não pago'),
+    (13, '200.00', 'Valor pago'),
+    (14, '250.00', 'Valor não pago'),
+    (15, '300.00', 'Valor pago');
+
+select * from clientes
+order by nome ASC;
+
+select * from evento
+order by data_evento asc;
+
+select * from inscricao;
+
+select * from pagamento;
+
+select c.id_cliente, c.nome, c.email, c.telefone, p.valor_pagamento, p.status_pagamento
+from clientes c
+inner join pagamento p on c.id_cliente = p.id_cliente
+order by c.nome ASC;
+
+select c.id_cliente, c.nome, c.email, c.telefone, e.nome_evento, e.local_evento
+from clientes c
+left join inscricao i on c.id_cliente = i.id_cliente
+left join evento e on i.id_evento = e.id_evento
+order by c.nome ASC;
+
+select c.id_cliente, c.nome, c.email, c.telefone, e.nome_evento, e.local_evento
+from clientes c
+right join inscricao i on c.id_cliente = i.id_cliente
+right join evento e on i.id_evento = e.id_evento
+order by c.nome ASC;
+
+select c.id_cliente, c.nome, c.email, c.telefone, e.nome_evento, e.local_evento
+from clientes c
+cross join inscricao i on c.id_cliente = i.id_cliente
+cross join evento e on i.id_evento = e.id_evento
+order by c.nome ASC;
+
+
