@@ -226,6 +226,8 @@ cross join imoveis i on c.id_inquilinos = i.id_imoveis
 
 delimiter $$
 
+
+
 create function media_pagamentos()
 returns float deterministic
 begin
@@ -238,8 +240,17 @@ end$$
 
 delimiter ;
 
+delimiter $$
+
+create procedure todos_proprietarios()
+begin
+    select * from proprietario;
+end$$
+
+delimiter ;
 
 
-select media_pagamentos()
+select media_pagamentos();
+call todos_proprietarios();
 
 
