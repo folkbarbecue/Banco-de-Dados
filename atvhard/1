@@ -194,8 +194,6 @@ values (1, 'Registro número 1', 'Em dia', 1000, 'Registro de loja'),
        (59, 'Registro número 59', 'Em dia', 950, 'Registro de apartamento'),
        (60, 'Registro número 60', 'Atrasado', 450, 'Registro de apartamento');
 
-select avg(valor)
-from pagamentos;
 
 select MAX(valor)
 from pagamentos;
@@ -225,3 +223,23 @@ right join imoveis i2 on i.id_imoveis = i2.id_imoveis;
 select c.id_inquilinos, c.pessoas, c.id_imoveis, i.id_imoveis, i.casas, i.apartamentos, i.comerciais, i.locais_casa, i.locais_apartamento, i.locais_loja
 from inquilinos c
 cross join imoveis i on c.id_inquilinos = i.id_imoveis
+
+delimiter $$
+
+create function media_pagamentos()
+returns float deterministic
+begin
+   declare resultado float;
+   select avg(valor) into resultado
+   from pagamentos
+   where valor is not null;
+   return resultado;
+end$$
+
+delimiter ;
+
+
+
+select media_pagamentos()
+
+
