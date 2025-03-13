@@ -1,0 +1,227 @@
+create database imobiliaria;
+use imobiliaria;
+drop database imobiliaria;
+
+create table proprietario (
+    id_proprietario int primary key auto_increment unique not null,
+    nome_proprietario varchar(255) not null,
+    contato_proprietario varchar(255) not null unique
+);
+
+create table imoveis (
+    id_imoveis int primary key auto_increment unique not null,
+    casas varchar(255) not null unique,
+    apartamentos varchar(255) not null unique,
+    comerciais varchar(255) not null unique,
+    locais_casa varchar(255) not null,
+    locais_apartamento varchar(255) not null,
+    locais_loja varchar(255) not null
+);
+
+create table inquilinos (
+    id_inquilinos int primary key auto_increment unique not null,
+    pessoas varchar(255) not null,
+    id_imoveis int
+);
+
+create table contratos (
+    id_contratos int primary key auto_increment unique not null,
+    id_inquilinos int,
+    id_imoveis int,
+    id_proprietario int,
+    validacao varchar(255)
+);
+
+create table pagamentos (
+    id_pagamentos int primary key auto_increment unique not null,
+    valor float,
+    registros varchar(255),
+    atrasos varchar(255),
+    tipo varchar(255)
+);
+
+alter table inquilinos add constraint id_imoveis foreign key(id_imoveis) references imoveis(id_imoveis); 
+alter table contratos add constraint id_inquilinos foreign key(id_inquilinos) references inquilinos(id_inquilinos); 
+alter table contratos add constraint id_proprietario foreign key(id_proprietario) references proprietario(id_proprietario);
+
+insert into proprietario (id_proprietario, nome_proprietario, contato_proprietario)
+values(1, 'Roberto', '9131-1938'),
+(2, 'Antonio', '1921-3291'),
+(3, 'Maria', '1234-5678'),
+(4, 'José', '8765-4321'),
+(5, 'Ana', '1122-3344'),
+(6, 'Luiz', '5566-7789'),  
+(7, 'Paula', '9988-7767'),  
+(8, 'Carlos', '6655-4432'),  
+(9, 'Fernanda', '7788-9901'),  
+(10, 'Pedro', '4455-6676'),  
+(11, 'Júlia', '1100-2232'),  
+(12, 'Marcos', '3322-4456'),  
+(13, 'Carla', '6677-8898'),  
+(14, 'Ricardo', '9988-1123'),  
+(15, 'Beatriz', '2233-4454'),  
+(16, 'Rafael', '5566-7787'),  
+(17, 'Gabriela', '3344-5565'),  
+(18, 'Vinícius', '7788-9899'),  
+(19, 'Patrícia', '1100-2231'),  
+(20, 'Felipe', '4455-6678');
+
+insert into imoveis (id_imoveis, casas, apartamentos, comerciais, locais_casa, locais_apartamento, locais_loja)
+values (1, 'Casa número 1', 'Condomínio Izabeles', 'Lojas Luiza', 'Recife-PE', 'Igarassu-PE', 'Carpinas-PE'),
+       (2, 'Casa número 2', 'Condomínio João', 'Lojas Bahia', 'Olinda-PE', 'Garanhuns-PE', 'Abreu e Lima-PE'),
+       (3, 'Casa número 3', 'Condomínio Maria', 'Lojas Americanas', 'Jaboatão dos Guararapes-PE', 'Recife-PE', 'Caruaru-PE'),
+       (4, 'Casa número 4', 'Condomínio Pedro', 'Lojas Marisa', 'Cabo de Santo Agostinho-PE', 'Garanhuns-PE', 'Arcoverde-PE'),
+       (5, 'Casa número 5', 'Condomínio Paulo', 'Lojas Riachuelo', 'Caruaru-PE', 'Petrolina-PE', 'Abreu e Lima-PE'),
+       (6, 'Casa número 6', 'Condomínio Ana', 'Lojas Magazine', 'Garanhuns-PE', 'Igarassu-PE', 'Vitória de Santo Antão-PE'),
+       (7, 'Casa número 7', 'Condomínio Carlos', 'Lojas Pernambucanas', 'Petrolina-PE', 'Olinda-PE', 'Jaboatão dos Guararapes-PE'),
+       (8, 'Casa número 8', 'Condomínio Júlia', 'Lojas Renner', 'Arcoverde-PE', 'Surubim-PE', 'Caruaru-PE'),
+       (9, 'Casa número 9', 'Condomínio Rodrigo', 'Lojas Extra', 'Paulista-PE', 'Recife-PE', 'Igarassu-PE'),
+       (10, 'Casa número 10', 'Condomínio Fernanda', 'Lojas Carrefour', 'Igarassu-PE', 'Carpina-PE', 'Cabo de Santo Agostinho-PE'),
+       (11, 'Casa número 11', 'Condomínio Beatriz', 'Lojas Centauro', 'Abreu e Lima-PE', 'Petrolina-PE', 'Vitória de Santo Antão-PE'),
+       (12, 'Casa número 12', 'Condomínio Lucas', 'Lojas Le Biscuit', 'Camaragibe-PE', 'Olinda-PE', 'Garanhuns-PE'),
+       (13, 'Casa número 13', 'Condomínio Vitória', 'Lojas C&A', 'São Lourenço da Mata-PE', 'Caruaru-PE', 'Abreu e Lima-PE'),
+       (14, 'Casa número 14', 'Condomínio Felipe', 'Lojas Casas Bahia', 'Vitória de Santo Antão-PE', 'Igarassu-PE', 'Paulista-PE'),
+       (15, 'Casa número 15', 'Condomínio Mariana', 'Lojas Ponto Frio', 'Gravatá-PE', 'Camaragibe-PE', 'Surubim-PE'),
+       (16, 'Casa número 16', 'Condomínio Gustavo', 'Lojas Fast Shop', 'Palmares-PE', 'Garanhuns-PE', 'Petrolina-PE'),
+       (17, 'Casa número 17', 'Condomínio Patrícia', 'Lojas Saraiva', 'Surubim-PE', 'Carpina-PE', 'Recife-PE'),
+       (18, 'Casa número 18', 'Condomínio Rafael', 'Lojas Kalunga', 'Carpina-PE', 'Olinda-PE', 'Arcoverde-PE'),
+       (19, 'Casa número 19', 'Condomínio Simone', 'Lojas Livraria Cultura', 'Goiana-PE', 'Camaragibe-PE', 'Palmares-PE'),
+       (20, 'Casa número 20', 'Condomínio Eduardo', 'Lojas Hering', 'Barreiros-PE', 'Surubim-PE', 'Vitória de Santo Antão-PE');
+
+insert into inquilinos (id_inquilinos, pessoas, id_imoveis)
+values (1, 'Romero', 1),
+       (2, 'Julia', 20),
+       (3, 'Carlos', 7),
+       (4, 'Mariana', 16),
+       (5, 'Pedro', 12),
+       (6, 'Fernanda', 3),
+       (7, 'Lucas', 19),
+       (8, 'Ana', 5),
+       (9, 'Gustavo', 14),
+       (10, 'Beatriz', 2),
+       (11, 'Rafael', 8),
+       (12, 'Isabela', 17),
+       (13, 'Felipe', 10),
+       (14, 'Camila', 13),
+       (15, 'João', 4),
+       (16, 'Larissa', 18),
+       (17, 'Bruno', 9),
+       (18, 'Sophia', 6),
+       (19, 'Mateus', 15),
+       (20, 'Gabriela', 1);
+
+insert into contratos (id_contratos, id_inquilinos, id_imoveis, id_proprietario, validacao)
+values (1, 2, 20, 7, 'OK'),
+       (2, 7, 1, 20, 'Em andamento'),
+       (3, 1, 7, 2, 'OK'),
+       (4, 20, 2, 1, 'Em andamento'),
+       (5, 3, 1, 7, 'OK'),
+       (6, 5, 8, 12, 'Em andamento'),
+       (7, 10, 13, 14, 'OK'),
+       (8, 11, 4, 16, 'Em andamento'),
+       (9, 9, 19, 6, 'OK'),
+       (10, 18, 15, 3, 'Em andamento'),
+       (11, 17, 6, 5, 'OK'),
+       (12, 16, 10, 9, 'Em andamento'),
+       (13, 4, 11, 13, 'OK'),
+       (14, 8, 17, 15, 'Em andamento'),
+       (15, 12, 14, 18, 'OK'),
+       (16, 7, 5, 11, 'Em andamento'),
+       (17, 14, 9, 10, 'OK'),
+       (18, 13, 16, 19, 'Em andamento'),
+       (19, 2, 20, 7, 'OK'),
+       (20, 15, 12, 4, 'Em andamento');
+
+insert into pagamentos (id_pagamentos, registros, atrasos, valor, tipo)
+values (1, 'Registro número 1', 'Em dia', 1000, 'Registro de loja'),
+       (2, 'Registro número 2', 'Atrasado', 560, 'Registro de loja'),
+       (3, 'Registro número 3', 'Em dia', 750, 'Registro de loja'),
+       (4, 'Registro número 4', 'Atrasado', 430, 'Registro de loja'),
+       (5, 'Registro número 5', 'Em dia', 900, 'Registro de loja'),
+       (6, 'Registro número 6', 'Atrasado', 360, 'Registro de loja'),
+       (7, 'Registro número 7', 'Em dia', 680, 'Registro de loja'),
+       (8, 'Registro número 8', 'Atrasado', 500, 'Registro de loja'),
+       (9, 'Registro número 9', 'Em dia', 820, 'Registro de loja'),
+       (10, 'Registro número 10', 'Atrasado', 410, 'Registro de loja'),
+       (11, 'Registro número 11', 'Em dia', 920, 'Registro de loja'),
+       (12, 'Registro número 12', 'Atrasado', 470, 'Registro de loja'),
+       (13, 'Registro número 13', 'Em dia', 890, 'Registro de loja'),
+       (14, 'Registro número 14', 'Atrasado', 520, 'Registro de loja'),
+       (15, 'Registro número 15', 'Em dia', 700, 'Registro de loja'),
+       (16, 'Registro número 16', 'Atrasado', 340, 'Registro de loja'),
+       (17, 'Registro número 17', 'Em dia', 870, 'Registro de loja'),
+       (18, 'Registro número 18', 'Atrasado', 390, 'Registro de loja'),
+       (19, 'Registro número 19', 'Em dia', 950, 'Registro de loja'),
+       (20, 'Registro número 20', 'Atrasado', 450, 'Registro de loja'),
+       (21, 'Registro número 21', 'Em dia', 1000, 'Registro de casa'),
+       (22, 'Registro número 22', 'Atrasado', 560, 'Registro de casa'),
+       (23, 'Registro número 23', 'Em dia', 750, 'Registro de casa'),
+       (24, 'Registro número 24', 'Atrasado', 430, 'Registro de casa'),
+       (25, 'Registro número 25', 'Em dia', 900, 'Registro de casa'),
+       (26, 'Registro número 26', 'Atrasado', 360, 'Registro de casa'),
+       (27, 'Registro número 27', 'Em dia', 680, 'Registro de casa'),
+       (28, 'Registro número 28', 'Atrasado', 500, 'Registro de casa'),
+       (29, 'Registro número 29', 'Em dia', 820, 'Registro de casa'),
+       (30, 'Registro número 30', 'Atrasado', 410, 'Registro de casa'),
+       (31, 'Registro número 31', 'Em dia', 920, 'Registro de casa'),
+       (32, 'Registro número 32', 'Atrasado', 470, 'Registro de casa'),
+       (33, 'Registro número 33', 'Em dia', 890, 'Registro de casa'),
+       (34, 'Registro número 34', 'Atrasado', 520, 'Registro de casa'),
+       (35, 'Registro número 35', 'Em dia', 700, 'Registro de casa'),
+       (36, 'Registro número 36', 'Atrasado', 340, 'Registro de casa'),
+       (37, 'Registro número 37', 'Em dia', 870, 'Registro de casa'),
+       (38, 'Registro número 38', 'Atrasado', 390, 'Registro de casa'),
+       (39, 'Registro número 39', 'Em dia', 950, 'Registro de casa'),
+       (40, 'Registro número 40', 'Atrasado', 450, 'Registro de casa'),
+       (41, 'Registro número 41', 'Em dia', 1000, 'Registro de apartamento'),
+       (42, 'Registro número 42', 'Atrasado', 560, 'Registro de apartamento'),
+       (43, 'Registro número 43', 'Em dia', 750, 'Registro de apartamento'),
+       (44, 'Registro número 44', 'Atrasado', 430, 'Registro de apartamento'),
+       (45, 'Registro número 45', 'Em dia', 900, 'Registro de apartamento'),
+       (46, 'Registro número 46', 'Atrasado', 360, 'Registro de apartamento'),
+       (47, 'Registro número 47', 'Em dia', 680, 'Registro de apartamento'),
+       (48, 'Registro número 48', 'Atrasado', 500, 'Registro de apartamento'),
+       (49, 'Registro número 49', 'Em dia', 820, 'Registro de apartamento'),
+       (50, 'Registro número 50', 'Atrasado', 410, 'Registro de apartamento'),
+       (51, 'Registro número 51', 'Em dia', 920, 'Registro de apartamento'),
+       (52, 'Registro número 52', 'Atrasado', 470, 'Registro de apartamento'),
+       (53, 'Registro número 53', 'Em dia', 890, 'Registro de apartamento'),
+       (54, 'Registro número 54', 'Atrasado', 520, 'Registro de apartamento'),
+       (55, 'Registro número 55', 'Em dia', 700, 'Registro de apartamento'),
+       (56, 'Registro número 56', 'Atrasado', 340, 'Registro de apartamento'),
+       (57, 'Registro número 57', 'Em dia', 870, 'Registro de apartamento'),
+       (58, 'Registro número 58', 'Atrasado', 390, 'Registro de apartamento'),
+       (59, 'Registro número 59', 'Em dia', 950, 'Registro de apartamento'),
+       (60, 'Registro número 60', 'Atrasado', 450, 'Registro de apartamento');
+
+select avg(valor)
+from pagamentos;
+
+select MAX(valor)
+from pagamentos;
+
+select min(valor)
+from pagamentos;
+
+select count(validacao)
+from contratos;
+
+select sum(valor)
+from pagamentos;
+
+select c.id_inquilinos, c.pessoas, c.id_imoveis, e.id_contratos, e.id_proprietario, e.validacao
+from inquilinos c
+inner join contratos e on c.id_inquilinos = e.id_contratos;
+
+select i1.id_imoveis, i1.casas, i1.apartamentos, i1.comerciais, i1.locais_casa, i1.locais_apartamento, i1.locais_loja
+from imoveis i1
+left join imoveis i2 on i1.id_imoveis = i2.id_imoveis;
+
+
+select i.id_inquilinos, i.pessoas, i.id_imoveis
+from inquilinos i
+right join imoveis i2 on i.id_imoveis = i2.id_imoveis;
+
+select c.id_inquilinos, c.pessoas, c.id_imoveis, i.id_imoveis, i.casas, i.apartamentos, i.comerciais, i.locais_casa, i.locais_apartamento, i.locais_loja
+from inquilinos c
+cross join imoveis i on c.id_inquilinos = i.id_imoveis
