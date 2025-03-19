@@ -1,0 +1,104 @@
+create database atv;
+use atv;
+drop database atv;
+
+create table paciente(
+id_paciente int primary key auto_increment unique,
+nome varchar(255),
+idade int,
+telefone varchar(255)
+);
+
+create table medico(
+id_medico int primary key auto_increment unique,
+nomem varchar(255),
+setor int,
+especialidade varchar(255)
+);
+
+create table setor (
+id_setor int primary key auto_increment unique,
+nomes varchar(255),
+locas varchar(255)
+);
+
+create table unidade(
+id_unidade int primary key auto_increment unique,
+nomeu varchar(255),
+lugar varchar(255)
+);
+
+create table transferencias(
+id_transferencias int primary key auto_increment unique,
+id_setor int,
+id_paciente int
+);
+
+
+create table cc(
+id_cc int primary key auto_increment unique,
+dados varchar(255),
+id_transferencias int
+);
+
+alter table transferencias add constraint id_setor foreign key(id_setor)
+references setor(id_setor);
+
+
+alter table transferencias add constraint id_paciente foreign key(id_paciente)
+references paciente(id_paciente);
+
+alter table cc add constraint id_transferencias foreign key(id_transferencias)
+references transferencias(id_transferencias);
+
+insert into transferencias(id_transferencias, id_setor, id_paciente)
+values
+(1, 1, 1),
+(2, 2, 2);
+
+
+insert into cc(id_cc,dados, id_transferencias)
+values(1, 'Consulta para dr Romero', 1),
+(2, 'Consulta para doutor valdez', 2);
+
+insert into paciente(id_paciente, nome, idade, telefone)
+values(1, 'Fulano', 32, '(81) 1121-2121'),
+(2, 'Sicrano', 22, '(81) 1131-2121');
+
+insert into medico(id_medico, nomem, setor, especialidade)
+values
+(1, 'Romero', 1, 'Clinico Geral'),
+(2, 'Valdez', 1, 'Neurologista');
+
+insert into setor(id_setor, nomes, locas)
+values
+(1, 'Setor 1', 'Bairro do espinheiro'),
+(2, 'Setor 2', 'Bairro sei lá');
+
+insert into unidade(id_unidade, nomeu, lugar)
+values
+(1, 'Unidade número 1', 'Paulista'),
+(2, 'Unidade número 2', 'Igarassu');
+
+select * from transferencias;
+select * from cc;
+select * from paciente;
+select * from medico;
+select * from setor;
+select * from unidade;
+
+select s.id_setor, s.nomes, s.locas, u.id_unidade, u.nomeu, u.lugar
+from setor s
+inner join unidade u on s.id_setor = u.id_unidade;
+
+
+delimiter $$
+
+create procedure todos_medicos()
+begin
+    select * from medico;
+end$$
+
+delimiter ;
+
+call todos_medicos();
