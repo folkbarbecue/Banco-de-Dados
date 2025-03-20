@@ -1,0 +1,273 @@
+create database atv;
+use atv;
+-- drop database atv;
+
+create table clientes(
+id_c int primary key auto_increment unique,
+nome_c varchar(255),
+telefone_c varchar(15)
+);
+
+create table veiculos(
+id_v int primary key auto_increment unique,
+placa varchar(7),
+id_c int,
+modelo varchar(255)
+);
+
+create table servicos(
+id_s int primary key auto_increment unique,
+tipo_s varchar(255),
+preco varchar(255),
+id_v int
+);
+
+create table os(
+id_os int primary key auto_increment unique,
+id_v int,
+id_s int,
+status_os varchar(255)
+);
+
+create table mecanicos(
+id_m int primary key auto_increment unique,
+nome_m varchar(255)
+);
+
+alter table veiculos add constraint id_c foreign key (id_c) references clientes(id_c);
+alter table servicos add constraint id_v foreign key (id_v) references veiculos(id_v);
+alter table os add constraint id_vs foreign key (id_v) references veiculos(id_v);
+alter table os add constraint id_s foreign key (id_s) references servicos(id_s);
+
+insert into clientes(id_c, nome_c, telefone_c)
+values
+(1, 'Romero', '81 2311-4231'),
+(2, 'Thaís', '81-3839-2392'),
+(3, 'Clara', '81-3832-1282'),
+(4, 'Lucas', '81-3123-4567'),
+(5, 'Maria', '81-3344-5566'),
+(6, 'João', '81-9988-7766'),
+(7, 'Ana', '81-8877-6655'),
+(8, 'Carlos', '81-7766-5544'),
+(9, 'Fernanda', '81-6655-4433'),
+(10, 'Pedro', '81-5544-3322'),
+(11, 'Mariana', '81-4433-2211'),
+(12, 'Renato', '81-3322-1100'),
+(13, 'Isabela', '81-2211-0099'),
+(14, 'Paulo', '81-1100-9988'),
+(15, 'Juliana', '81-0099-8877'),
+(16, 'Felipe', '81-9988-7766'),
+(17, 'Camila', '81-8877-6655'),
+(18, 'Bruno', '81-7766-5544'),
+(19, 'Letícia', '81-6655-4433'),
+(20, 'Diego', '81-5544-3322');
+
+insert into veiculos(id_v, placa, modelo, id_c)
+values
+(1, 'PDF1R12', 'Fiat Argo', 1),
+(2, 'ADA2E84', 'Renaut Kwid', 2),
+(3, 'RZQ2Q23', 'Peugeot 208', 3),
+(4, 'XYZ3A56', 'Chevrolet Onix', 4),
+(5, 'ABC4D78', 'Hyundai HB20', 5),
+(6, 'MNO5E12', 'Volkswagen Gol', 6),
+(7, 'JKL6F34', 'Fiat Argo', 7),
+(8, 'QRS7G56', 'Toyota Etios', 8),
+(9, 'UVW8H78', 'Ford Ka', 9),
+(10, 'LMN9I90', 'Nissan March', 10),
+(11, 'PQR1J23', 'Volkswagen Fox', 11),
+(12, 'TUV2K45', 'Renault Sandero', 12),
+(13, 'GHI3L67', 'Chevrolet Prisma', 13),
+(14, 'NOP4M89', 'Honda Fit', 14),
+(15, 'DEF5N01', 'Fiat Uno', 15),
+(16, 'STU6O23', 'Peugeot 2008', 16),
+(17, 'CBA7P45', 'Ford Fiesta', 17),
+(18, 'VWX8Q67', 'Hyundai Creta', 18),
+(19, 'EFG9R89', 'Jeep Renegade', 19),
+(20, 'HIJ1S12', 'Volkswagen T-Cross', 20);
+
+insert into servicos(id_s, tipo_s, preco, id_v)
+values
+(1, 'Lava a Jato', 'R$50', 1),
+(2, 'Martelinho de Ouro', 'R$70', 2),
+(3, 'Manutenção de carro', 'R$300', 3),
+(4, 'Lava a Jato', 'R$50', 4),
+(5, 'Martelinho de Ouro', 'R$70', 5),
+(6, 'Manutenção de carro', 'R$350', 6),
+(7, 'Lava a Jato', 'R$50', 7),
+(8, 'Martelinho de Ouro', 'R$70', 8),
+(9, 'Manutenção de carro', 'R$400', 9),
+(10, 'Lava a Jato', 'R$50', 10),
+(11, 'Martelinho de Ouro', 'R$70', 11),
+(12, 'Manutenção de carro', 'R$450', 12),
+(13, 'Lava a Jato', 'R$50', 13),
+(14, 'Martelinho de Ouro', 'R$70', 14),
+(15, 'Manutenção de carro', 'R$500', 15),
+(16, 'Lava a Jato', 'R$50', 16),
+(17, 'Martelinho de Ouro', 'R$70', 17),
+(18, 'Manutenção de carro', 'R$550', 18),
+(19, 'Lava a Jato', 'R$50', 19),
+(20, 'Martelinho de Ouro', 'R$70', 20);
+
+insert into os(id_os, id_v , id_s, status_os)
+values
+(1, 1, 1, 'Em lavagem'),
+(2, 2, 2, 'Martelinho Concluido'),
+(3, 3, 3, 'NO aguardo para manutenção'),
+(4, 4, 4, 'Em lavagem'),
+(5, 5, 5, 'Martelinho em andamento'),
+(6, 6, 6, 'Manutenção concluída'),
+(7, 7, 7, 'Aguardando lavagem'),
+(8, 8, 8, 'Martelinho concluído'),
+(9, 9, 9, 'Manutenção em progresso'),
+(10, 10, 10, 'Lavagem concluída'),
+(11, 11, 11, 'Martelinho ok'),
+(12, 12, 12, 'Manutenção agendada'),
+(13, 13, 13, 'Lavagem em andamento'),
+(14, 14, 14, 'Martelinho concluído'),
+(15, 15, 15, 'Manutenção aguardando'),
+(16, 16, 16, 'Em lavagem'),
+(17, 17, 17, 'Martelinho em andamento'),
+(18, 18, 18, 'Manutenção concluída'),
+(19, 19, 19, 'Lavagem em fila de espera'),
+(20, 20, 20, 'Martelinho concluído');
+
+insert into mecanicos(id_m, nome_m)
+values
+(1, 'Romero '),
+(2, 'Arthur '),
+(3, 'Pedro '),
+(4, 'Romero '),
+(5, 'Arthur '),
+(6, 'Pedro '),
+(7, 'Romero '),
+(8, 'Arthur '),
+(9, 'Pedro '),
+(10, 'Romero '),
+(11, 'Arthur '),
+(12, 'Pedro '),
+(13, 'Romero '),
+(14, 'Arthur '),
+(15, 'Pedro '),
+(16, 'Romero '),
+(17, 'Arthur '),
+(18, 'Pedro '),
+(19, 'Romero '),
+(20, 'Arthur ');
+
+delimiter $$
+
+create function avg_preco()
+returns float deterministic
+begin
+    declare media_preco float;
+    select avg(cast(preco as decimal(10,2))) into media_preco
+    from servicos
+    where preco is not null;
+    
+    return media_preco;
+end$$
+
+delimiter ;
+
+delimiter $$
+
+create function max_preco()
+returns float deterministic
+begin
+    declare max_preco float;
+    select max(cast(preco as decimal(10,2))) into max_preco
+    from servicos
+    where preco is not null;
+    
+    return max_preco;
+end$$
+
+delimiter ;
+
+delimiter $$
+
+create function min_preco()
+returns float deterministic
+begin
+    declare min_preco float;
+    select min(cast(preco as decimal(10,2))) into min_preco
+    from servicos
+    where preco is not null;
+    
+    return min_preco;
+end$$
+
+delimiter ;
+
+delimiter $$
+
+create function count_servicos()
+returns int deterministic
+begin
+    declare total_servicos int;
+    select count(*) into total_servicos
+    from servicos
+    where preco is not null;
+    
+    return total_servicos;
+end$$
+
+delimiter ;
+
+delimiter $$
+
+create function sum_preco()
+returns float deterministic
+begin
+    declare soma_preco float;
+    select sum(cast(preco as decimal(10,2))) into soma_preco
+    from servicos
+    where preco is not null;
+    
+    return soma_preco;
+end$$
+
+delimiter ;
+
+
+select s.id_s, s.tipo_s, s.preco, v.id_v, v.placa, v.modelo, v.id_c
+from servicos s
+inner join veiculos v on s.id_v = v.id_v
+union
+select s.id_s, s.tipo_s, s.preco, m.id_m, m.nome_m, NULL as placa, NULL as modelo
+from servicos s
+inner join mecanicos m on s.id_v = m.id_m;
+
+select avg_preco();
+select max_preco();
+select min_preco();
+select count_servicos();
+select sum_preco();
+
+select c.id_c, c.nome_c, c.telefone_c, v1.id_v, v1.placa, v1.modelo
+from clientes c
+left join veiculos v1 on c.id_c = v1.id_v;
+
+select s1.id_s, s1.tipo_s, s1.preco, s1.id_v, m1.id_m, m1.nome_m
+from servicos s1
+right join mecanicos m1 on s1.id_s = m1.id_m;
+
+select v2.id_v , v2.placa, v2.modelo, v2.id_c, s2.id_s, s2.tipo_s, s2.preco, s2.id_v
+from veiculos v2
+cross join servicos s2 on v2.id_v = s2.id_s;
+
+
+delimiter $$
+
+create procedure listar_os_cliente(in cliente_id INT)
+begin
+    select o.id_os, o.id_v, o.id_s, o.status_os, v.placa, v.modelo, s.tipo_s, s.preco
+    from os o
+    inner join veiculos v on o.id_v = v.id_v
+    inner join servicos s on o.id_s = s.id_s
+    where v.id_c = cliente_id;
+end$$
+
+delimiter ;
+
+call listar_os_cliente(1);  
